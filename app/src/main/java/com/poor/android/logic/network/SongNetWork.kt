@@ -1,5 +1,7 @@
 package com.poor.android.logic.network
 
+import com.poor.android.logic.model.MusicType
+import com.poor.android.logic.network.cloudmusic.ICloudService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -10,12 +12,15 @@ import kotlin.coroutines.suspendCoroutine
 
 object SongNetWork {
 
-    private val songService = ServiceCreator.create<ISongService>()
+    private val cloudService = ServiceCreator.create<ICloudService>(MusicType.CloudMusic)
 
-    // 通过搜索获得歌曲信息
-    suspend fun searchSongs(keywords: String) = songService.searchSongs(keywords).await()
-    suspend fun getSongsDetail(ids: String) = songService.getSongsDetail(ids).await()
-    suspend fun getSongMp3Url(id: Int) = songService.getSongMp3Url(id).await()
+    /**
+     * 网易云音乐
+     */
+    suspend fun searchCloudSongs(keywords: String) = cloudService.searchCloudSongs(keywords).await()
+    suspend fun getCloudSongsDetail(ids: String) = cloudService.getCloudSongsDetail(ids).await()
+    suspend fun getCloudSongMp3Url(id: Int) = cloudService.getCloudSongMp3Url(id).await()
+    suspend fun getCloudSongLyric(id: Int) = cloudService.getCloudSongLyric(id).await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->

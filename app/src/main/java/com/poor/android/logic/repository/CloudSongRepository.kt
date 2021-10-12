@@ -8,19 +8,19 @@ import java.lang.RuntimeException
 import java.lang.StringBuilder
 import kotlin.coroutines.CoroutineContext
 
-object SongRepository {
+object CloudSongRepository {
 
-    fun searchSongs(keywords: String) = fire(Dispatchers.IO) {
-        val searchSongsResponse = SongNetWork.searchSongs(keywords)
-        if (searchSongsResponse.code == 200) {
-            val songs = searchSongsResponse.result
+    fun searchCloudSongs(keywords: String) = fire(Dispatchers.IO) {
+        val cloudSongs = SongNetWork.searchCloudSongs(keywords)
+        if (cloudSongs.code == 200) {
+            val songs = cloudSongs.result
             Result.success(songs)
         } else {
-            Result.failure(RuntimeException("searchSongsResponse code is ${searchSongsResponse.code}"))
+            Result.failure(RuntimeException("searchSongsResponse code is ${cloudSongs.code}"))
         }
     }
 
-    fun getSongsDetail(vararg ids: Int) = fire(Dispatchers.IO) {
+    fun getCloudSongsDetail(vararg ids: Int) = fire(Dispatchers.IO) {
         val idsStr = StringBuilder().run {
             for (id in ids.indices) {
                 append(ids[id])
@@ -30,31 +30,42 @@ object SongRepository {
             }
             toString()
         }
-        val songsDetailResponse = SongNetWork.getSongsDetail(idsStr)
-        if (songsDetailResponse.code == 200) {
-            val songs = songsDetailResponse.songs
+        val cloudSongsDetail = SongNetWork.getCloudSongsDetail(idsStr)
+        if (cloudSongsDetail.code == 200) {
+            val songs = cloudSongsDetail.songs
             Result.success(songs)
         } else {
-            Result.failure(RuntimeException("songsDetailResponse code is ${songsDetailResponse.code}"))
+            Result.failure(RuntimeException("songsDetailResponse code is ${cloudSongsDetail.code}"))
         }
     }
 
-    fun getSongMp3Url(id: Int) = fire(Dispatchers.IO) {
-        val songMp3Url = SongNetWork.getSongMp3Url(id)
-        if (songMp3Url.code == 200) {
-            val data = songMp3Url.data
+    fun getCloudSongMp3Url(id: Int) = fire(Dispatchers.IO) {
+        val cloudSongMp3Url = SongNetWork.getCloudSongMp3Url(id)
+        if (cloudSongMp3Url.code == 200) {
+            val data = cloudSongMp3Url.data
             Result.success(data)
         } else {
-            Result.failure(RuntimeException("songsDetailResponse code is ${songMp3Url.code}"))
+            Result.failure(RuntimeException("songsDetailResponse code is ${cloudSongMp3Url.code}"))
         }
     }
 
-    private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) = liveData(context) {
-        val result = try {
-            block()
-        } catch (e: Exception) {
-            Result.failure(e)
+    fun getCloudSongLyric(id: Int) = fire(Dispatchers.IO) {
+        val cloudSongLyric = SongNetWork.getCloudSongLyric(id)
+        if (cloudSongLyric.code == 200) {
+            val lrc = cloudSongLyric.lrc
+            Result.success(lrc)
+        } else {
+            Result.failure(RuntimeException("songsDetailResponse code is ${cloudSongLyric.code}"))
         }
-        emit(result)
     }
+
+    private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
+        liveData(context) {
+            val result = try {
+                block()
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+            emit(result)
+        }
 }

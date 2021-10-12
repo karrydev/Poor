@@ -1,8 +1,8 @@
-package com.poor.android.logic.model
+package com.poor.android.logic.model.cloudmusic
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchSongResponse(val result: Result, val code: Int) {
+data class SearchCloudSongsResponse(val result: Result, val code: Int) {
 
     data class Result(val songs: List<SongDetail>, val songCount: Int)
 

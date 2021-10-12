@@ -1,4 +1,6 @@
 package com.poor.android.public.base
 
-class BaseViewModel {
+import androidx.lifecycle.ViewModel
+
+abstract class BaseViewModel: ViewModel() {
 }

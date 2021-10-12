@@ -1,6 +1,6 @@
-package com.poor.android.logic.model
+package com.poor.android.logic.model.cloudmusic
 
-data class SongsDetailResponse(val songs: List<Song>, val code: Int) {
+data class CloudSongsDetailResponse(val songs: List<Song>, val code: Int) {
 
     data class Song(val id: Int, val name: String, val al: Al)
 

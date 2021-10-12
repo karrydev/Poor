@@ -1,12 +1,19 @@
-package com.poor.android
+package com.poor.android.view
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.poor.android.R
+import com.poor.android.databinding.ActivityMainBinding
 import com.poor.android.public.base.BaseActivity
+import com.poor.android.logic.vm.MainViewModel
 
-class MainActivity : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
+
+    override val layoutId: Int
+        get() = R.layout.activity_main
+
+    override fun getViewModel() = MainViewModel::class.java
+
+    override fun observe() {
+        TODO("Not yet implemented")
     }
+
 }
