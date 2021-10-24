@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginSize">16dp</dimen>
+    <dimen name="marginSize2">32dp</dimen>
+    <dimen name="cardViewMargin">8dp</dimen>
+    <dimen name="paddingSize">8dp</dimen>
+    <dimen name="paddingSize2">16dp</dimen>
+    <dimen name="topBarHeight">56dp</dimen>
+    <dimen name="bottomTabHeight">64dp</dimen>
+    <dimen name="textPadding">8dp</dimen>
+    <dimen name="iconSize">30dp</dimen>
+    <dimen name="titleSize">14sp</dimen>
+    <dimen name="bottomBadgeTitleSize">10sp</dimen>
+    <dimen name="contentTitleSize">20sp</dimen>
+    <dimen name="clear_icon_size">20dp</dimen>
+</resources>

@@ -1,14 +1,20 @@
 package com.poor.android.logic.repository
 
 import androidx.lifecycle.liveData
-import com.poor.android.logic.network.SongNetWork
+import com.poor.android.logic.model.cloudmusic.CloudSong
+import com.poor.android.logic.model.db.SongDatabase
+import com.poor.android.logic.model.network.SongNetWork
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 import java.lang.RuntimeException
 import java.lang.StringBuilder
 import kotlin.coroutines.CoroutineContext
 
-object CloudSongRepository {
+object SongRepository {
+
+    private val songDao by lazy { SongDatabase.getDatabase().songDao() }
+
+    /************************************ 网易云音乐 start *************************************/
 
     fun searchCloudSongs(keywords: String) = fire(Dispatchers.IO) {
         val cloudSongs = SongNetWork.searchCloudSongs(keywords)
@@ -58,6 +64,24 @@ object CloudSongRepository {
             Result.failure(RuntimeException("songsDetailResponse code is ${cloudSongLyric.code}"))
         }
     }
+
+    suspend fun insertCloudSong(cloudSong: CloudSong) = songDao.insertCloudSong(cloudSong)
+
+    suspend fun updateCloudSong(cloudSong: CloudSong) = songDao.updateCloudSong(cloudSong)
+
+    suspend fun queryCloudSongById(songId: Int) = songDao.queryCloudSongById(songId)
+
+    suspend fun queryCloudSongByName(songName: String) = songDao.queryCloudSongByName(songName)
+
+    suspend fun queryAllCloudSongs() = songDao.queryAllCloudSongs()
+
+    suspend fun deleteCloudSongById(songId: Int) = songDao.deleteCloudSongById(songId)
+
+    suspend fun deleteCloudSongByName(songName: String) = songDao.deleteCloudSongByName(songName)
+
+    suspend fun deleteAllCloudSongs() = songDao.deleteAllCloudSong()
+
+    /************************************ 网易云音乐 end *************************************/
 
     private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
         liveData(context) {

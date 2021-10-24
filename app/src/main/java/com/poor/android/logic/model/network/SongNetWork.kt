@@ -1,7 +1,7 @@
-package com.poor.android.logic.network
+package com.poor.android.logic.model.network
 
 import com.poor.android.logic.model.MusicType
-import com.poor.android.logic.network.cloudmusic.ICloudService
+import com.poor.android.logic.model.network.cloudmusic.ICloudService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

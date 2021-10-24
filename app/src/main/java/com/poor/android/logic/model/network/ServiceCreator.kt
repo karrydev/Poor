@@ -1,4 +1,4 @@
-package com.poor.android.logic.network
+package com.poor.android.logic.model.network
 
 import com.poor.android.logic.model.MusicType
 import retrofit2.Retrofit

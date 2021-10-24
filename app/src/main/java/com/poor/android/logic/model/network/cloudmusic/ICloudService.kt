@@ -1,4 +1,4 @@
-package com.poor.android.logic.network.cloudmusic
+package com.poor.android.logic.model.network.cloudmusic
 
 import com.poor.android.logic.model.cloudmusic.CloudSongLyric
 import com.poor.android.logic.model.cloudmusic.SearchCloudSongsResponse
