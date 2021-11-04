@@ -5,8 +5,8 @@
     <solid android:color="@color/gold20"
         android:width="2dp" />
     <corners android:radius="10dp" />
-    <padding android:left="@dimen/paddingSize"
-        android:right="@dimen/paddingSize"
-        android:top="@dimen/paddingSize"
-        android:bottom="@dimen/paddingSize" />
+    <padding android:left="@dimen/padding_size"
+        android:right="@dimen/padding_size"
+        android:top="@dimen/padding_size"
+        android:bottom="@dimen/padding_size" />
 </shape>

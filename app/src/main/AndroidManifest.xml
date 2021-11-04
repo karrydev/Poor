@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.poor.android">
+
     <!-- 网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,7 +14,16 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MaterialComponents.NoActionBar">
+        android:theme="@style/AppTheme"
+        tools:targetApi="n">
+        <service
+            android:name="com.poor.android.logic.service.PlayerService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.activity.PlayerActivity"
+            android:exported="false" />
         <activity
             android:name=".view.activity.MainActivity"
             android:exported="true">

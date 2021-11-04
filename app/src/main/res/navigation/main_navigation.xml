@@ -30,5 +30,9 @@
         android:id="@+id/searchFragment"
         android:name="com.poor.android.view.fragment.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_navigation_find"
+            app:destination="@id/navigation_find" />
+    </fragment>
 </navigation>

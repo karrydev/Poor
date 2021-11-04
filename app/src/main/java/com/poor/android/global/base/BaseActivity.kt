@@ -7,6 +7,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
+import android.os.Build
+
+import android.view.WindowManager
+
+import android.view.Window
+
+import android.app.Activity
+import com.poor.android.R
+import android.graphics.Color
+
+import android.view.View
 
 abstract class BaseActivity<ViewModel : BaseViewModel, Binding : ViewDataBinding> :
     AppCompatActivity() {
@@ -19,6 +30,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel, Binding : ViewDataBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setStatusBarColor()
         activities.add(this)
         binding = DataBindingUtil.setContentView(this, layoutId)
 
@@ -35,18 +47,30 @@ abstract class BaseActivity<ViewModel : BaseViewModel, Binding : ViewDataBinding
         }
     }
 
+    /**
+     * 修改状态栏颜色
+     */
+    private fun setStatusBarColor() {
+        val window = window
+        window.clearFlags(
+            WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    or WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
+        )
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = Color.TRANSPARENT
+    }
+
     abstract fun initView()
 
     abstract fun initData()
 
     abstract fun initListener()
 
-    protected fun addObserve(lifecycleObserver: LifecycleObserver? = null, block: () -> Unit = {}) {
-        if (lifecycleObserver != null) {
-            lifecycle.addObserver(lifecycleObserver)
-            observerList.add(lifecycleObserver)
-        }
-        block()
+    protected fun addObserve(lifecycleObserver: LifecycleObserver) {
+        lifecycle.addObserver(lifecycleObserver)
+        observerList.add(lifecycleObserver)
     }
 
     protected fun finishAllActivity() {

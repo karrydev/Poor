@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.fragment.PlayMusicFragment">
+        tools:context=".view.fragment.PlaySongFragment">
 
         <ImageView
             android:id="@+id/iv_bg"
@@ -20,26 +20,26 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="25dp"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/play_music_top"
+            <FrameLayout
+                android:id="@+id/play_song_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/marginSize">
+                android:padding="@dimen/margin_size">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:onClick="onBackClick"
-                    android:src="@mipmap/icon_back_left" />
+                    android:layout_width="@dimen/player_back_size"
+                    android:layout_height="@dimen/player_back_size"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/icon_back_down" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/marginSize"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="vertical">
 
                     <TextView
@@ -50,26 +50,26 @@
                         android:gravity="center"
                         android:text="歌名"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/titleSize"
+                        android:textSize="@dimen/play_song_title_size"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:gravity="center"
                         android:id="@+id/tv_author"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="作者"
                         android:textColor="@color/darkgray"
-                        android:textSize="@dimen/titleSize" />
+                        android:textSize="@dimen/play_song_title_size" />
                 </LinearLayout>
-            </LinearLayout>
+            </FrameLayout>
 
-<!--            <com.example.music.views.PlayMusicView-->
-<!--                android:id="@+id/play_music_view"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_below="@+id/play_music_top"/>-->
+            <!--                        <com.example.music.views.PlayMusicView-->
+            <!--                            android:id="@+id/play_music_view"-->
+            <!--                            android:layout_width="wrap_content"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:layout_centerHorizontal="true"-->
+            <!--                            android:layout_below="@+id/play_music_top"/>-->
         </RelativeLayout>
     </FrameLayout>
 </layout>

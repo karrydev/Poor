@@ -1,4 +1,4 @@
-package com.poor.android.logic.model.cloudmusic
+package com.poor.android.logic.model.song.cloud
 
 data class CloudSongLyric(val lrc: Lrc, val code: Int) {
 

@@ -1,8 +1,8 @@
 package com.poor.android.logic.model
 
-enum class MusicType {
+enum class SongType {
     CloudMusic,
     QQMusic,
     KugoMusic,
-    NoMusic
+    NoSong
 }

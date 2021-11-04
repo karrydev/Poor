@@ -1,14 +1,19 @@
-package com.poor.android.logic.model.network.cloudmusic
+package com.poor.android.logic.model.network.cloud
 
-import com.poor.android.logic.model.cloudmusic.CloudSongLyric
-import com.poor.android.logic.model.cloudmusic.SearchCloudSongsResponse
-import com.poor.android.logic.model.cloudmusic.CloudSongsDetailResponse
-import com.poor.android.logic.model.cloudmusic.CloudSongResponse
+import com.poor.android.logic.model.song.SearchSongsSuggestResponse
+import com.poor.android.logic.model.song.cloud.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ICloudService {
+
+    /**
+     * 搜索推荐
+     * keywords：搜索关键字
+     */
+    @GET("search/suggest?type=mobile")
+    fun searchSongsSuggest(@Query("keywords") keywords: String): Call<SearchSongsSuggestResponse>
 
     /**
      * 搜索歌曲

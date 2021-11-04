@@ -13,10 +13,15 @@ import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewDataBinding> : Fragment() {
 
+    private var observerList = ArrayList<LifecycleObserver>()
     lateinit var binding: Binding
     lateinit var viewModel: ViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         return binding.root
     }
@@ -30,7 +35,7 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewDataBinding
 
     private fun initVM() {
         getViewModel()?.let {
-            viewModel = ViewModelProvider(this).get(it)
+            viewModel = ViewModelProvider(requireActivity()).get(it)
             addObserve(viewModel)
         }
     }
@@ -39,11 +44,9 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewDataBinding
 
     abstract fun initData()
 
-    protected fun addObserve(lifecycleObserver: LifecycleObserver? = null, block: () -> Unit = {}) {
-        if (lifecycleObserver != null) {
-            lifecycle.addObserver(lifecycleObserver)
-        }
-        block()
+    protected fun addObserve(lifecycleObserver: LifecycleObserver) {
+        lifecycle.addObserver(lifecycleObserver)
+        observerList.add(lifecycleObserver)
     }
 
     @get: LayoutRes
@@ -52,7 +55,9 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewDataBinding
     abstract fun getViewModel(): Class<ViewModel>?
 
     override fun onDestroy() {
-        lifecycle.removeObserver(viewModel)
+        for (observer in observerList) {
+            lifecycle.removeObserver(observer)
+        }
         super.onDestroy()
     }
 }

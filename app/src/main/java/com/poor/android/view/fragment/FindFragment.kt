@@ -11,6 +11,8 @@ class FindFragment : BaseFragment<MainViewModel, FragmentFindBinding>() {
 
     override fun initView() {
         binding.clickHandle = ClickHandle()
+        binding.recommendSongCv.itemTitle.text = resources.getText(R.string.recommend_song)
+        binding.recommendSongListCv.itemTitle.text = resources.getText(R.string.recommend_song_list)
     }
 
     override fun initData() {

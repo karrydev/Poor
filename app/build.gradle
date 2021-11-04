@@ -65,4 +65,5 @@ dependencies {
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
 }

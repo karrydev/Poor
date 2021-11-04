@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="marginSize">16dp</dimen>
-    <dimen name="marginSize2">32dp</dimen>
-    <dimen name="cardViewMargin">8dp</dimen>
-    <dimen name="paddingSize">8dp</dimen>
-    <dimen name="paddingSize2">16dp</dimen>
-    <dimen name="topBarHeight">56dp</dimen>
-    <dimen name="bottomTabHeight">64dp</dimen>
-    <dimen name="textPadding">8dp</dimen>
-    <dimen name="iconSize">30dp</dimen>
-    <dimen name="titleSize">14sp</dimen>
-    <dimen name="bottomBadgeTitleSize">10sp</dimen>
-    <dimen name="contentTitleSize">20sp</dimen>
+    <dimen name="padding_size">8dp</dimen>
+    <dimen name="margin_size">16dp</dimen>
+    <dimen name="margin_size2">32dp</dimen>
+    <dimen name="cv_margin">8dp</dimen>
+    <dimen name="top_bar_height">81dp</dimen>
+    <dimen name="top_bar_padding">8dp</dimen>
+    <dimen name="bottom_tab_height">64dp</dimen>
+    <dimen name="icon_size">30dp</dimen>
+    <dimen name="play_song_title_size">14sp</dimen>
+    <dimen name="bottom_badge_title_size">10sp</dimen>
+    <dimen name="cv_title_size">18sp</dimen>
+    <dimen name="cv_more_size">12sp</dimen>
+    <dimen name="search_et_text_size">16sp</dimen>
     <dimen name="clear_icon_size">20dp</dimen>
+    <dimen name="song_name_size">16sp</dimen>
+    <dimen name="song_artists_size">14sp</dimen>
+    <dimen name="song_type_icon_size">14dp</dimen>
+    <dimen name="song_more_icon_size">20dp</dimen>
+    <dimen name="player_back_size">18dp</dimen>
 </resources>

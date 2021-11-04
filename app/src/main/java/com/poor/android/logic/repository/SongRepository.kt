@@ -1,7 +1,7 @@
 package com.poor.android.logic.repository
 
 import androidx.lifecycle.liveData
-import com.poor.android.logic.model.cloudmusic.CloudSong
+import com.poor.android.logic.model.song.cloud.Song
 import com.poor.android.logic.model.db.SongDatabase
 import com.poor.android.logic.model.network.SongNetWork
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +13,48 @@ import kotlin.coroutines.CoroutineContext
 object SongRepository {
 
     private val songDao by lazy { SongDatabase.getDatabase().songDao() }
+
+    fun searchSongsSuggest(keywords: String) = fire(Dispatchers.IO) {
+        val searchSuggest = SongNetWork.searchSongsSuggest(keywords)
+        if (searchSuggest.code == 200) {
+            val songs = searchSuggest.result
+            Result.success(songs)
+        } else {
+            Result.failure(RuntimeException("searchSongsResponse code is ${searchSuggest.code}"))
+        }
+    }
+
+    /************************************ 数据库操作 start *************************************/
+
+    suspend fun insertSong(song: Song) = songDao.insertSong(song)
+
+    suspend fun updateSong(song: Song) = songDao.updateSong(song)
+
+    suspend fun querySongById(songId: Int) = songDao.querySongById(songId)
+
+    suspend fun querySongByName(songName: String) = songDao.querySongByName(songName)
+
+    suspend fun queryAllSongs() = songDao.queryAllSongs()
+
+    suspend fun deleteSong(song: Song) = songDao.deleteSong(song)
+
+    suspend fun deleteSongById(songId: Int) = songDao.deleteSongById(songId)
+
+    suspend fun deleteSongByName(songName: String) = songDao.deleteSongByName(songName)
+
+    suspend fun deleteAllSongs() = songDao.deleteAllSong()
+
+    /************************************ 数据库操作 end *************************************/
+
+    private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
+        liveData(context) {
+            val result = try {
+                block()
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+            emit(result)
+        }
 
     /************************************ 网易云音乐 start *************************************/
 
@@ -65,31 +107,5 @@ object SongRepository {
         }
     }
 
-    suspend fun insertCloudSong(cloudSong: CloudSong) = songDao.insertCloudSong(cloudSong)
-
-    suspend fun updateCloudSong(cloudSong: CloudSong) = songDao.updateCloudSong(cloudSong)
-
-    suspend fun queryCloudSongById(songId: Int) = songDao.queryCloudSongById(songId)
-
-    suspend fun queryCloudSongByName(songName: String) = songDao.queryCloudSongByName(songName)
-
-    suspend fun queryAllCloudSongs() = songDao.queryAllCloudSongs()
-
-    suspend fun deleteCloudSongById(songId: Int) = songDao.deleteCloudSongById(songId)
-
-    suspend fun deleteCloudSongByName(songName: String) = songDao.deleteCloudSongByName(songName)
-
-    suspend fun deleteAllCloudSongs() = songDao.deleteAllCloudSong()
-
     /************************************ 网易云音乐 end *************************************/
-
-    private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
-        liveData(context) {
-            val result = try {
-                block()
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
-            emit(result)
-        }
 }

@@ -1,24 +1,24 @@
 package com.poor.android.logic.model.db
 
 import androidx.room.TypeConverter
-import com.poor.android.logic.model.MusicType
+import com.poor.android.logic.model.SongType
 import java.lang.StringBuilder
 
 class CloudSongConverters {
 
     @TypeConverter
     fun revertType (type: Int) = when (type) {
-        0 -> MusicType.CloudMusic
-        1 -> MusicType.QQMusic
-        2 -> MusicType.KugoMusic
-        else -> MusicType.NoMusic
+        0 -> SongType.CloudMusic
+        1 -> SongType.QQMusic
+        2 -> SongType.KugoMusic
+        else -> SongType.NoSong
     }
 
     @TypeConverter
-    fun converterType (type: MusicType) = when (type) {
-        MusicType.CloudMusic -> 0
-        MusicType.QQMusic -> 1
-        MusicType.KugoMusic -> 2
+    fun converterType (type: SongType) = when (type) {
+        SongType.CloudMusic -> 0
+        SongType.QQMusic -> 1
+        SongType.KugoMusic -> 2
         else -> -1
     }
 

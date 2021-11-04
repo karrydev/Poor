@@ -1,11 +1,11 @@
-package com.poor.android.logic.model.cloudmusic
+package com.poor.android.logic.model.song.cloud
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.poor.android.logic.model.MusicType
+import com.poor.android.logic.model.SongType
 
 @Entity
-data class CloudSong(
+data class Song(
     @PrimaryKey var songId: Int,
     var songName: String,
     var artists: List<String>,
@@ -14,5 +14,5 @@ data class CloudSong(
     var mp3Url: String,
     var lyric: String
 ) {
-    var type = MusicType.CloudMusic
+    var type = SongType.CloudMusic
 }

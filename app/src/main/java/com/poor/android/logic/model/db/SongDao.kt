@@ -1,7 +1,7 @@
 package com.poor.android.logic.model.db
 
 import androidx.room.*
-import com.poor.android.logic.model.cloudmusic.CloudSong
+import com.poor.android.logic.model.song.cloud.Song
 
 @Dao
 interface SongDao {
@@ -9,31 +9,31 @@ interface SongDao {
     /************************************ 网易云音乐 start *************************************/
 
     @Insert
-    suspend fun insertCloudSong(cloudSong: CloudSong): Long
+    suspend fun insertSong(song: Song): Long
 
     @Update
-    suspend fun updateCloudSong(cloudSong: CloudSong)
+    suspend fun updateSong(song: Song)
 
-    @Query("select * from CloudSong where songId = :songId")
-    suspend fun queryCloudSongById(songId: Int): CloudSong
+    @Query("select * from Song where songId = :songId")
+    suspend fun querySongById(songId: Int): Song
 
-    @Query("select * from CloudSong where songName = :songName")
-    suspend fun queryCloudSongByName(songName: String): CloudSong
+    @Query("select * from Song where songName = :songName")
+    suspend fun querySongByName(songName: String): Song
 
-    @Query("select * from CloudSong")
-    suspend fun queryAllCloudSongs(): List<CloudSong>
+    @Query("select * from Song")
+    suspend fun queryAllSongs(): List<Song>
 
     @Delete
-    suspend fun deleteCloudSong(cloudSong: CloudSong)
+    suspend fun deleteSong(song: Song)
 
-    @Query("delete from CloudSong where songId = :songId")
-    suspend fun deleteCloudSongById(songId: Int)
+    @Query("delete from Song where songId = :songId")
+    suspend fun deleteSongById(songId: Int)
 
-    @Query("delete from CloudSong where songName = :songName")
-    suspend fun deleteCloudSongByName(songName: String)
+    @Query("delete from Song where songName = :songName")
+    suspend fun deleteSongByName(songName: String)
 
-    @Query("delete from CloudSong")
-    suspend fun deleteAllCloudSong()
+    @Query("delete from Song")
+    suspend fun deleteAllSong()
 
     /************************************ 网易云音乐 end *************************************/
 }
